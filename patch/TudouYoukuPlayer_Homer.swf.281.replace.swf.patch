@@ -1,0 +1,1335 @@
+diff -u -r -N --exclude .git ./com/youku/data/PlayerConstant.class.asasm D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/data/PlayerConstant.class.asasm
+--- ./com/youku/data/PlayerConstant.class.asasm	2012-12-03 21:45:39.055229600 +0800
++++ D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/data/PlayerConstant.class.asasm	2012-12-03 15:38:54.782016400 +0800
+@@ -96,6 +96,7 @@
+     initproperty        QName(PackageNamespace(""), "SPECIAL_TYPE_SHENHE")
+ 
+     findproperty        QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE")
++    ; pushstring          "v.youku.com"
+     pushstring          "v.opengg.me"
+     initproperty        QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE")
+ 
+@@ -138,6 +139,7 @@
+  trait const QName(PackageNamespace(""), "PANEL_CAPTION") slotid 13 type QName(PackageNamespace(""), "String") value Utf8("caption") end
+  trait const QName(PackageNamespace(""), "SPECIAL_TYPE_JIETU") slotid 14 type QName(PackageNamespace(""), "String") value Utf8("jietu") end
+  trait const QName(PackageNamespace(""), "SPECIAL_TYPE_SHENHE") slotid 15 type QName(PackageNamespace(""), "String") value Utf8("shenhe") end
++ ; trait const QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE") slotid 16 type QName(PackageNamespace(""), "String") value Utf8("v.youku.com") end
+  trait const QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE") slotid 16 type QName(PackageNamespace(""), "String") value Utf8("v.opengg.me") end
+  trait const QName(PackageNamespace(""), "MANAGE_SITE") slotid 17 type QName(PackageNamespace(""), "String") value Utf8("manage.youku.com") end
+  trait const QName(PackageNamespace(""), "FEEMANAGE_SITE") slotid 18 type QName(PackageNamespace(""), "String") value Utf8("feemanage.youku.com") end
+diff -u -r -N --exclude .git ./com/youku/plugins/ads/model/ADProxy.class.asasm D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/plugins/ads/model/ADProxy.class.asasm
+--- ./com/youku/plugins/ads/model/ADProxy.class.asasm	2012-12-03 21:45:39.616833900 +0800
++++ D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/plugins/ads/model/ADProxy.class.asasm	2012-12-03 19:18:08.044055200 +0800
+@@ -473,6 +473,14 @@
+       setlocal            9
+ 
+ L345:
++      ; getlocal            6
++      ; findpropstrict      QName(PackageNamespace("flash.net"), "URLRequest")
++      ; getlocal2
++      ; getlocal            9
++      ; add
++      ; constructprop       QName(PackageNamespace("flash.net"), "URLRequest"), 1
++      ; callpropvoid        QName(PackageNamespace(""), "load"), 1
++
+       returnvoid
+      end ; code
+     end ; body
+diff -u -r -N --exclude .git ./com/youku/plugins/report/model/ReportProxy.class.asasm D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/plugins/report/model/ReportProxy.class.asasm
+--- ./com/youku/plugins/report/model/ReportProxy.class.asasm	2012-12-03 21:45:39.835237500 +0800
++++ D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/plugins/report/model/ReportProxy.class.asasm	2012-12-03 19:26:58.888299400 +0800
+@@ -268,18 +268,17 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       pushnull
+-      ifne                L8
++      ifne                L7
+ 
+       returnvoid
+ 
+-L8:
++L7:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "rootData")
+       getproperty         QName(Namespace("com.youku.interfaces:IRootData"), "videoId")
+@@ -288,17 +287,17 @@
+ 
+       getlocal1
+       pushnull
+-      ifne                L18
++      ifne                L17
+ 
+       pushstring          "-1"
+       setlocal1
+ 
+-L18:
++L17:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "vidEncoded")
+       pushnull
+-      ifeq                L28
++      ifeq                L27
+ 
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+@@ -306,12 +305,12 @@
+       coerce_s
+       setlocal1
+ 
+-L28:
++L27:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "videoId")
+       pushnull
+-      ifeq                L38
++      ifeq                L37
+ 
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+@@ -319,7 +318,7 @@
+       coerce_s
+       setlocal1
+ 
+-L38:
++L37:
+       findpropstrict      QName(PackageNamespace("flash.net"), "URLVariables")
+       constructprop       QName(PackageNamespace("flash.net"), "URLVariables"), 0
+       coerce              QName(PackageNamespace("flash.net"), "URLVariables")
+@@ -348,19 +347,19 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayerData"), "referrer")
+       pushstring          ""
+       equals
+-      iffalse             L66
++      iffalse             L65
+ 
+       pushstring          "null"
+       coerce_a
+-      jump                L71
++      jump                L70
+ 
+-L66:
++L65:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "_playerProxy")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayerProxy"), "playerData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayerData"), "referrer")
+       coerce_a
+-L71:
++L70:
+       setproperty         Multiname("referer", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+       getlocal2
+@@ -471,13 +470,13 @@
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "rootData")
+       getproperty         QName(Namespace("com.youku.interfaces:IRootData"), "wd")
+       pushnull
+-      ifeq                L167
++      ifeq                L166
+ 
+       getlocal0
+       pushstring          "1"
+       callpropvoid        QName(PackageNamespace(""), "sendBlogLog"), 1
+ 
+-L167:
++L166:
+       returnvoid
+      end ; code
+     end ; body
+@@ -496,7 +495,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -505,7 +503,7 @@
+       pushnull
+       equals
+       dup
+-      iftrue              L15
++      iftrue              L14
+ 
+       pop
+       getlocal0
+@@ -513,21 +511,21 @@
+       getproperty         QName(PackageNamespace(""), "length")
+       pushbyte            0
+       lessequals
+-L15:
+-      iffalse             L17
++L14:
++      iffalse             L16
+ 
+       returnvoid
+ 
+-L17:
++L16:
+       getlocal2
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "_allReportDatas")
+       getproperty         QName(PackageNamespace(""), "length")
+-      ifnge               L23
++      ifnge               L22
+ 
+       returnvoid
+ 
+-L23:
++L22:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "_allReportDatas")
+       getlocal2
+@@ -538,11 +536,11 @@
+       getlocal3
+       getlocal1
+       callproperty        QName(PackageNamespace(""), "isCodeCanBeSent"), 1
+-      iftrue              L34
++      iftrue              L33
+ 
+       returnvoid
+ 
+-L34:
++L33:
+       findpropstrict      QName(PackageNamespace("flash.net"), "URLVariables")
+       constructprop       QName(PackageNamespace("flash.net"), "URLVariables"), 0
+       coerce              QName(PackageNamespace("flash.net"), "URLVariables")
+@@ -622,7 +620,7 @@
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "show")
+       pushnull
+-      ifeq                L109
++      ifeq                L108
+ 
+       getlocal            4
+       getlocal0
+@@ -631,12 +629,12 @@
+       getproperty         QName(PackageNamespace(""), "userID")
+       setproperty         Multiname("userid", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-L109:
++L108:
+       findpropstrict      QName(PackageNamespace(""), "Number")
+       getlocal1
+       callproperty        QName(PackageNamespace(""), "Number"), 1
+       pushshort           3008
+-      ifne                L137
++      ifne                L136
+ 
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "rootData")
+@@ -644,7 +642,7 @@
+       pushstring          "exterior"
+       equals
+       dup
+-      iftrue              L127
++      iftrue              L126
+ 
+       pop
+       getlocal0
+@@ -652,27 +650,27 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IRootData"), "winType")
+       pushstring          "BDskin"
+       equals
+-L127:
+-      iffalse             L132
++L126:
++      iffalse             L131
+ 
+       getlocal0
+       pushbyte            2
+       dup
+       callpropvoid        QName(PackageNamespace(""), "setlog"), 2
+ 
+-L132:
++L131:
+       getlocal0
+       pushstring          "times"
+       pushbyte            61
+       newobject           1
+       callpropvoid        QName(PackageNamespace(""), "sendVideoTime"), 1
+ 
+-L137:
++L136:
+       getlocal1
+       pushstring          "3001"
+       equals
+       dup
+-      iffalse             L158
++      iffalse             L157
+ 
+       pop
+       getlocal0
+@@ -682,7 +680,7 @@
+       equals
+       not
+       dup
+-      iffalse             L158
++      iffalse             L157
+ 
+       pop
+       getlocal0
+@@ -691,28 +689,28 @@
+       pushstring          ""
+       equals
+       not
+-L158:
+-      iffalse             L163
++L157:
++      iffalse             L162
+ 
+       getlocal0
+       pushbyte            0
+       pushbyte            3
+       callpropvoid        QName(PackageNamespace(""), "sendflag"), 2
+ 
+-L163:
++L162:
+       getlocal1
+       pushstring          "3002"
+       equals
+       dup
+-      iftrue              L172
++      iftrue              L171
+ 
+       pop
+       getlocal1
+       pushstring          "3008"
+       equals
+-L172:
++L171:
+       dup
+-      iffalse             L190
++      iffalse             L189
+ 
+       pop
+       getlocal0
+@@ -722,7 +720,7 @@
+       equals
+       not
+       dup
+-      iffalse             L190
++      iffalse             L189
+ 
+       pop
+       getlocal0
+@@ -731,15 +729,15 @@
+       pushstring          ""
+       equals
+       not
+-L190:
+-      iffalse             L195
++L189:
++      iffalse             L194
+ 
+       getlocal0
+       pushbyte            0
+       pushbyte            4
+       callpropvoid        QName(PackageNamespace(""), "sendflag"), 2
+ 
+-L195:
++L194:
+       pushstring          "http://stat.youku.com/player/addPlayerDynamicReport"
+       setlocal            6
+ 
+@@ -803,7 +801,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -815,11 +812,11 @@
+       getlocal0
+       callproperty        QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "getIKuFlag"), 0
+       pushstring          "n"
+-      ifeq                L12
++      ifeq                L11
+ 
+       returnvoid
+ 
+-L12:
++L11:
+       getlocal2
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+@@ -951,7 +948,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -1055,7 +1051,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -1142,7 +1137,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -1230,7 +1224,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -1303,7 +1296,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -1311,19 +1303,19 @@
+       pushnull
+       equals
+       dup
+-      iftrue              L13
++      iftrue              L12
+ 
+       pop
+       getlocal1
+       getproperty         QName(PackageNamespace(""), "type")
+       pushnull
+       equals
+-L13:
+-      iffalse             L15
++L12:
++      iffalse             L14
+ 
+       returnvoid
+ 
+-L15:
++L14:
+       pushstring          "http://211.151.50.22/logsys/logstorage/append?project=playerror&log="
+       setlocal2
+ 
+@@ -1359,7 +1351,7 @@
+       coerce_a
+       convert_b
+       dup
+-      iffalse             L51
++      iffalse             L50
+ 
+       pop
+       getlocal0
+@@ -1367,17 +1359,17 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "videoId")
+       coerce_a
+       convert_b
+-L51:
++L50:
+       dup
+-      iffalse             L58
++      iffalse             L57
+ 
+       pop
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "controller")
+       convert_b
+-L58:
+-      iffalse             L76
++L57:
++      iffalse             L75
+ 
+       getlocal3
+       getlocal0
+@@ -1399,7 +1391,7 @@
+       getproperty         QName(PackageNamespace(""), "area_code")
+       setproperty         Multiname("area", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-L76:
++L75:
+       getlocal2
+       getlex              QName(PackageNamespace("com.adobe.json"), "JSON")
+       getlocal3
+@@ -1440,7 +1432,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -1448,19 +1439,19 @@
+       pushnull
+       equals
+       dup
+-      iftrue              L13
++      iftrue              L12
+ 
+       pop
+       getlocal1
+       getproperty         QName(PackageNamespace(""), "type")
+       pushnull
+       equals
+-L13:
+-      iffalse             L15
++L12:
++      iffalse             L14
+ 
+       returnvoid
+ 
+-L15:
++L14:
+       pushstring          "http://211.151.50.22/logsys/logstorage/append?project=playvv&log="
+       setlocal2
+ 
+@@ -1505,17 +1496,17 @@
+       getproperty         QName(PackageNamespace(""), "area_code")
+       setproperty         Multiname("area", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L123
++      jump                L122
+ 
+-L52:
++L51:
+       label
+       getlocal3
+       pushstring          "coreinit"
+       setproperty         Multiname("type", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L174
++      jump                L173
+ 
+-L57:
++L56:
+       label
+       getlocal1
+       getproperty         QName(PackageNamespace(""), "data")
+@@ -1523,7 +1514,7 @@
+       equals
+       not
+       dup
+-      iffalse             L72
++      iffalse             L71
+ 
+       pop
+       getlocal1
+@@ -1532,8 +1523,8 @@
+       pushnull
+       equals
+       not
+-L72:
+-      iffalse             L78
++L71:
++      iffalse             L77
+ 
+       getlocal3
+       getlocal1
+@@ -1541,46 +1532,46 @@
+       getproperty         Multiname("allow", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+       setproperty         Multiname("allow", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-L78:
++L77:
+       getlocal3
+       pushstring          "allowp2p"
+       setproperty         Multiname("type", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L174
++      jump                L173
+ 
+-L82:
++L81:
+       label
+       getlocal3
+       pushstring          "iku"
+       setproperty         Multiname("type", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L174
++      jump                L173
+ 
+-L87:
++L86:
+       label
+       getlocal3
+       pushstring          "loadp2p"
+       setproperty         Multiname("type", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L174
++      jump                L173
+ 
+-L92:
++L91:
+       label
+       getlocal3
+       pushstring          "realusep2p"
+       setproperty         Multiname("type", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L174
++      jump                L173
+ 
+-L97:
++L96:
+       label
+       getlocal3
+       pushstring          "notrealusep2p"
+       setproperty         Multiname("type", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L174
++      jump                L173
+ 
+-L102:
++L101:
+       label
+       getlocal3
+       pushstring          "socketfail"
+@@ -1591,27 +1582,27 @@
+       getproperty         QName(PackageNamespace(""), "data")
+       pushnull
+       equals
+-      iffalse             L115
++      iffalse             L114
+ 
+       pushstring          ""
+       coerce_a
+-      jump                L119
++      jump                L118
+ 
+-L115:
++L114:
+       getlocal1
+       getproperty         QName(PackageNamespace(""), "data")
+       getproperty         Multiname("error", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+       coerce_a
+-L119:
++L118:
+       setproperty         Multiname("error", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-      jump                L174
++      jump                L173
+ 
+-L121:
++L120:
+       label
+-      jump                L174
++      jump                L173
+ 
+-L123:
++L122:
+       getlocal1
+       getproperty         QName(PackageNamespace(""), "type")
+       setlocal            5
+@@ -1619,78 +1610,78 @@
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "CORE_INIT_EVENT")
+       getlocal            5
+-      ifstrictne          L132
++      ifstrictne          L131
+ 
+       pushbyte            0
+-      jump                L172
++      jump                L171
+ 
+-L132:
++L131:
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "PLAY_POLICY_ALLOW")
+       getlocal            5
+-      ifstrictne          L138
++      ifstrictne          L137
+ 
+       pushbyte            1
+-      jump                L172
++      jump                L171
+ 
+-L138:
++L137:
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "PLAYVV_IKU")
+       getlocal            5
+-      ifstrictne          L144
++      ifstrictne          L143
+ 
+       pushbyte            2
+-      jump                L172
++      jump                L171
+ 
+-L144:
++L143:
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "LOAD_P2P_SWC")
+       getlocal            5
+-      ifstrictne          L150
++      ifstrictne          L149
+ 
+       pushbyte            3
+-      jump                L172
++      jump                L171
+ 
+-L150:
++L149:
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "REAL_USE_P2P")
+       getlocal            5
+-      ifstrictne          L156
++      ifstrictne          L155
+ 
+       pushbyte            4
+-      jump                L172
++      jump                L171
+ 
+-L156:
++L155:
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "NOT_REAL_USE_P2P")
+       getlocal            5
+-      ifstrictne          L162
++      ifstrictne          L161
+ 
+       pushbyte            5
+-      jump                L172
++      jump                L171
+ 
+-L162:
++L161:
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "P2P_SOCKET_FAIL")
+       getlocal            5
+-      ifstrictne          L168
++      ifstrictne          L167
+ 
+       pushbyte            6
+-      jump                L172
+-
+-L168:
+       jump                L171
+ 
++L167:
++      jump                L170
++
+       pushbyte            7
+-      jump                L172
++      jump                L171
+ 
+-L171:
++L170:
+       pushbyte            7
+-L172:
++L171:
+       kill                5
+-      lookupswitch        L121, [L52, L57, L82, L87, L92, L97, L102, L121]
++      lookupswitch        L120, [L51, L56, L81, L86, L91, L96, L101, L120]
+ 
+-L174:
++L173:
+       getlocal2
+       getlex              QName(PackageNamespace("com.adobe.json"), "JSON")
+       getlocal3
+@@ -1731,7 +1722,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -1839,7 +1829,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -2783,17 +2772,16 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "shouldSendWplayLog")
+-      iftrue              L7
++      iftrue              L6
+ 
+       returnvoid
+ 
+-L7:
++L6:
+       findpropstrict      QName(PackageNamespace("flash.net"), "URLVariables")
+       constructprop       QName(PackageNamespace("flash.net"), "URLVariables"), 0
+       coerce              QName(PackageNamespace("flash.net"), "URLVariables")
+@@ -2810,7 +2798,7 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IRootData"), "extstring")
+       convert_b
+       dup
+-      iffalse             L29
++      iffalse             L28
+ 
+       pop
+       getlocal0
+@@ -2819,8 +2807,8 @@
+       pushstring          ""
+       equals
+       not
+-L29:
+-      iffalse             L35
++L28:
++      iffalse             L34
+ 
+       getlocal1
+       getlocal0
+@@ -2828,7 +2816,7 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IRootData"), "extstring")
+       setproperty         Multiname("extstring", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-L35:
++L34:
+       pushstring          "http://v.youku.com/player/wplaylog/"
+       setlocal2
+ 
+@@ -2964,7 +2952,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -3013,19 +3000,19 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayerData"), "referrer")
+       pushstring          ""
+       equals
+-      iffalse             L45
++      iffalse             L44
+ 
+       pushstring          "null"
+       coerce_a
+-      jump                L50
++      jump                L49
+ 
+-L45:
++L44:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "_playerProxy")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayerProxy"), "playerData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayerData"), "referrer")
+       coerce_a
+-L50:
++L49:
+       setproperty         Multiname("referer", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+       getlocal1
+@@ -3103,17 +3090,16 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+       getlex              QName(PackageNamespace("com.youku"), "PlayerConfig")
+       getproperty         QName(PackageNamespace(""), "isTudouPlayer")
+-      iffalse             L7
++      iffalse             L6
+ 
+       returnvoid
+ 
+-L7:
++L6:
+       pushstring          "1"
+       setlocal1
+ 
+@@ -3179,7 +3165,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -3300,7 +3285,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -3329,19 +3313,19 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "user")
+       pushnull
+       equals
+-      iffalse             L28
++      iffalse             L27
+ 
+       pushbyte            0
+       coerce_a
+-      jump                L33
++      jump                L32
+ 
+-L28:
++L27:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "user")
+       getproperty         QName(PackageNamespace(""), "userID")
+       coerce_a
+-L33:
++L32:
+       setproperty         Multiname("uid", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+       getlocal            4
+@@ -3362,19 +3346,19 @@
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "show")
+       pushnull
+       equals
+-      iffalse             L54
++      iffalse             L53
+ 
+       pushstring          ""
+       coerce_a
+-      jump                L59
++      jump                L58
+ 
+-L54:
++L53:
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "show")
+       getproperty         QName(PackageNamespace(""), "showID")
+       coerce_a
+-L59:
++L58:
+       setproperty         Multiname("sid", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+       getlocal            4
+@@ -3398,7 +3382,7 @@
+ 
+       getlocal3
+       pushnull
+-      ifeq                L101
++      ifeq                L100
+ 
+       pushbyte            0
+       setlocal            10
+@@ -3407,9 +3391,9 @@
+       coerce_a
+       setlocal            11
+ 
+-      jump                L97
++      jump                L96
+ 
+-L85:
++L84:
+       label
+       getlocal            11
+       getlocal            10
+@@ -3424,13 +3408,13 @@
+       getproperty         MultinameL([PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+       setproperty         MultinameL([PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-L97:
++L96:
+       hasnext2            11, 10
+-      iftrue              L85
++      iftrue              L84
+ 
+       kill                11
+       kill                10
+-L101:
++L100:
+       findpropstrict      QName(PackageNamespace(""), "Object")
+       constructprop       QName(PackageNamespace(""), "Object"), 0
+       coerce              QName(PackageNamespace(""), "Object")
+@@ -3447,16 +3431,16 @@
+       callproperty        QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "getFullscreenNumber"), 0
+       pushbyte            0
+       equals
+-      iffalse             L119
++      iffalse             L118
+ 
+       pushstring          "off"
+       coerce_a
+-      jump                L121
++      jump                L120
+ 
+-L119:
++L118:
+       pushstring          "on"
+       coerce_a
+-L121:
++L120:
+       setproperty         Multiname("f", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+       getlocal            5
+@@ -3578,7 +3562,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -3627,13 +3610,13 @@
+ 
+       getlocal            4
+       pushbyte            255
+-      ifeq                L44
++      ifeq                L43
+ 
+       getlocal            5
+       getlocal            4
+       setproperty         Multiname("last", [PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#0"), PackageNamespace(""), ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), PackageNamespace("com.youku.plugins.report.model"), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "com.youku.plugins.report.model:ReportProxy#1"), PackageInternalNs("com.youku.plugins.report.model"), StaticProtectedNs("com.youku.plugins.report.model:ReportProxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.proxy:Proxy"), StaticProtectedNs("org.puremvc.as3.multicore.patterns.observer:Notifier")])
+ 
+-L44:
++L43:
+       pushstring          "http://hz.youku.com/red/ggnotice.php"
+       setlocal            6
+ 
+@@ -3675,7 +3658,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -3757,7 +3739,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -3774,7 +3755,7 @@
+       getlocal0
+       getproperty         QName(ProtectedNamespace("com.youku.plugins.report.model:ReportProxy"), "playlistData")
+       getproperty         QName(Namespace("com.youku.interfaces:IPlayListData"), "show")
+-      iffalse             L23
++      iffalse             L22
+ 
+       findpropstrict      QName(PackageNamespace(""), "String")
+       getlocal0
+@@ -3785,7 +3766,7 @@
+       coerce_s
+       setlocal3
+ 
+-L23:
++L22:
+       pushstring          "http://e.stat.youku.com/recommond/log?"
+       getlocal1
+       add
+@@ -3827,7 +3808,6 @@
+      maxscopedepth 7
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude .git ./com/youku/plugins/report/view/FlashCookie.class.asasm D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/plugins/report/view/FlashCookie.class.asasm
+--- ./com/youku/plugins/report/view/FlashCookie.class.asasm	2012-12-03 21:45:40.069239700 +0800
++++ D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/plugins/report/view/FlashCookie.class.asasm	2012-12-03 17:13:45.046683400 +0800
+@@ -889,7 +889,6 @@
+      maxscopedepth 11
+      code
+       returnvoid
+-
+       getlocal0
+       pushscope
+ 
+@@ -907,7 +906,7 @@
+ 
+       getlocal1
+       pushbyte            255
+-      ifeq                L252
++      ifeq                L251
+ 
+       getlocal0
+       getlocal1
+@@ -919,7 +918,7 @@
+ 
+       getlocal3
+       pushnull
+-      ifeq                L243
++      ifeq                L242
+ 
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "_IWT_URL")
+@@ -1031,7 +1030,7 @@
+       pushbyte            8
+       getproperty         MultinameL([PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#0"), PackageNamespace(""), PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#1"), PackageNamespace("com.youku.plugins.report.view"), PackageInternalNs("com.youku.plugins.report.view"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.plugins.report.view:FlashCookie"), StaticProtectedNs("com.youku.plugins.report.view:FlashCookie"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher")])
+       pushbyte            2
+-      ifnlt               L146
++      ifnlt               L145
+ 
+       getlocal0
+       getlocal3
+@@ -1051,9 +1050,9 @@
+       add
+       callpropvoid        QName(PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#0"), "DataSaveSet"), 9
+ 
+-      jump                L167
++      jump                L166
+ 
+-L146:
++L145:
+       getlocal0
+       getlocal3
+       pushbyte            0
+@@ -1077,7 +1076,7 @@
+       pushbyte            255
+       callpropvoid        QName(PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#0"), "HartSaveSet"), 2
+ 
+-L167:
++L166:
+       getlocal0
+       findpropstrict      QName(PackageNamespace("flash.net"), "URLLoader")
+       constructprop       QName(PackageNamespace("flash.net"), "URLLoader"), 0
+@@ -1120,7 +1119,7 @@
+ 
+       getlocal2
+       pushstring          "A"
+-      ifne                L215
++      ifne                L214
+ 
+       getlocal0
+       pushstring          "开始播放视频A点发送doDataSend_"
+@@ -1133,12 +1132,12 @@
+       add
+       callpropvoid        QName(PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#0"), "DebugInfo"), 1
+ 
+-      jump                L242
++      jump                L241
+ 
+-L215:
++L214:
+       getlocal2
+       pushstring          "B"
+-      ifne                L229
++      ifne                L228
+ 
+       getlocal0
+       pushstring          "正常结束播放B点发送doDataSend_"
+@@ -1151,12 +1150,12 @@
+       add
+       callpropvoid        QName(PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#0"), "DebugInfo"), 1
+ 
+-      jump                L242
++      jump                L241
+ 
+-L229:
++L228:
+       getlocal2
+       pushstring          "C"
+-      ifne                L242
++      ifne                L241
+ 
+       getlocal0
+       pushstring          "历史播放记录C点补发doDataSend_"
+@@ -1169,10 +1168,10 @@
+       add
+       callpropvoid        QName(PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#0"), "DebugInfo"), 1
+ 
+-L242:
+-      jump                L252
++L241:
++      jump                L251
+ 
+-L243:
++L242:
+       getlocal0
+       pushstring          "意外调用:doDataSend_"
+       getlocal2
+@@ -1183,7 +1182,7 @@
+       add
+       callpropvoid        QName(PrivateNamespace(null, "com.youku.plugins.report.view:FlashCookie#0"), "DebugInfo"), 1
+ 
+-L252:
++L251:
+       returnvoid
+      end ; code
+     end ; body
+diff -u -r -N --exclude .git ./com/youku/utils/DependenceChecker/Dependence.class.asasm D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/utils/DependenceChecker/Dependence.class.asasm
+--- ./com/youku/utils/DependenceChecker/Dependence.class.asasm	2012-12-03 21:45:39.133229200 +0800
++++ D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/utils/DependenceChecker/Dependence.class.asasm	2012-12-03 15:35:19.587772500 +0800
+@@ -1,6 +1,6 @@
+ class
+  refid "com.youku.utils:DependenceChecker/Dependence"
+- instance QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "Dependence")
++ instance QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "Dependence")
+   extends QName(PackageNamespace(""), "Object")
+   flag SEALED
+   flag PROTECTEDNS
+diff -u -r -N --exclude .git ./com/youku/utils/DependenceChecker.class.asasm D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/utils/DependenceChecker.class.asasm
+--- ./com/youku/utils/DependenceChecker.class.asasm	2012-12-03 21:45:39.133229200 +0800
++++ D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/utils/DependenceChecker.class.asasm	2012-12-03 15:35:19.584772900 +0800
+@@ -21,13 +21,13 @@
+ 
+      getlocal0
+      newarray            0
+-     initproperty        QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++     initproperty        QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+ 
+      returnvoid
+     end ; code
+    end ; body
+   end ; method
+-  trait slot QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences") type QName(PackageNamespace(""), "Array") end
++  trait slot QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences") type QName(PackageNamespace(""), "Array") end
+   trait method QName(PackageNamespace(""), "addDependence")
+    method
+     refid "com.youku.utils:DependenceChecker/addDependence"
+@@ -53,9 +53,9 @@
+ L7:
+       label
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getlocal2
+-      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
++      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
+       getglobalscope
+       getslot             2
+       astypelate
+@@ -70,14 +70,14 @@
+ L20:
+       getlocal2
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getproperty         QName(PackageNamespace(""), "length")
+       iflt                L7
+ 
+ L25:
+-      findpropstrict      QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "Dependence")
+-      constructprop       QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "Dependence"), 0
+-      coerce              QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "Dependence")
++      findpropstrict      QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "Dependence")
++      constructprop       QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "Dependence"), 0
++      coerce              QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "Dependence")
+       setlocal3
+ 
+       getlocal3
+@@ -90,12 +90,12 @@
+ 
+       getlocal2
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getproperty         QName(PackageNamespace(""), "length")
+       ifnge               L45
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getlocal3
+       callpropvoid        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "push"), 1
+ 
+@@ -103,10 +103,10 @@
+ 
+ L45:
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getlocal2
+       getlocal3
+-      setproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
++      setproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
+ 
+ L50:
+       returnvoid
+@@ -139,9 +139,9 @@
+ L7:
+       label
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getlocal2
+-      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
++      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
+       getglobalscope
+       getslot             2
+       astypelate
+@@ -150,9 +150,9 @@
+       ifne                L27
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getlocal2
+-      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
++      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
+       getglobalscope
+       getslot             2
+       astypelate
+@@ -164,7 +164,7 @@
+ L28:
+       getlocal2
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getproperty         QName(PackageNamespace(""), "length")
+       iflt                L7
+ 
+@@ -197,9 +197,9 @@
+ L7:
+       label
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getlocal2
+-      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
++      getproperty         MultinameL([PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), PackageNamespace(""), PackageNamespace("com.youku.utils"), PackageInternalNs("com.youku.utils"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.youku.utils:DependenceChecker"), StaticProtectedNs("com.youku.utils:DependenceChecker")])
+       getglobalscope
+       getslot             2
+       astypelate
+@@ -215,7 +215,7 @@
+ L21:
+       getlocal2
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "_dependences")
++      getproperty         QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "_dependences")
+       getproperty         QName(PackageNamespace(""), "length")
+       iflt                L7
+ 
+diff -u -r -N --exclude .git ./com/youku/utils/DependenceChecker.script.asasm D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/utils/DependenceChecker.script.asasm
+--- ./com/youku/utils/DependenceChecker.script.asasm	2012-12-03 21:45:39.133229200 +0800
++++ D:\wamp\www\TudouYoukuPlayer_Homer-281-0/com/youku/utils/DependenceChecker.script.asasm	2012-12-03 15:35:19.588774400 +0800
+@@ -26,7 +26,7 @@
+     getlex              QName(PackageNamespace(""), "Object")
+     newclass            "com.youku.utils:DependenceChecker/Dependence"
+     popscope
+-    initproperty        QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "Dependence")
++    initproperty        QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "Dependence")
+ 
+     returnvoid
+    end ; code
+@@ -35,7 +35,7 @@
+  trait class QName(PackageNamespace("com.youku.utils"), "DependenceChecker") slotid 1
+   #include "DependenceChecker.class.asasm"
+  end ; trait
+- trait class QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#0"), "Dependence") slotid 2
++ trait class QName(PrivateNamespace(null, "com.youku.utils:DependenceChecker#1"), "Dependence") slotid 2
+   #include "DependenceChecker/Dependence.class.asasm"
+  end ; trait
+ end ; script

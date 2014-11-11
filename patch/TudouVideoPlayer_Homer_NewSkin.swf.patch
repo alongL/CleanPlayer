@@ -1,0 +1,999 @@
+diff -u -r -N --exclude=.git ./cn/snowkit/uitls/VersionUtil.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/cn/snowkit/uitls/VersionUtil.class.asasm
+--- ./cn/snowkit/uitls/VersionUtil.class.asasm	2012-12-01 17:17:31.691093100 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/cn/snowkit/uitls/VersionUtil.class.asasm	2012-12-01 15:21:35.851409200 +0800
+@@ -48,7 +48,8 @@
+    returns QName(PackageNamespace(""), "void")
+    body
+     maxstack 5
+-    localcount 6
++    ; localcount 6
++    localcount 7
+     initscopedepth 3
+     maxscopedepth 4
+     code
+@@ -71,6 +72,16 @@
+      coerce              QName(PackageNamespace(""), "XML")
+      setlocal            5
+ 
++     pushstring          "Hacked By "
++     getlex              QName(PackageNamespace("com.tudou.config"), "Config")
++     getproperty         QName(PackageNamespace(""), "HACK_AUTHOR")
++     add
++     pushstring          " "
++     add
++     getlocal3
++     add
++     setlocal3
++
+      getlocal3
+      pushstring          "@build"
+      getlocal            5
+@@ -111,16 +122,50 @@
+      getproperty         QName(PackageNamespace(""), "contextMenu")
+      callpropvoid        QName(PackageNamespace(""), "hideBuiltInItems"), 0
+ 
++     findpropstrict      QName(PackageNamespace("flash.ui"), "ContextMenuItem")
++     getlocal3
++     constructprop       QName(PackageNamespace("flash.ui"), "ContextMenuItem"), 1
++     setlocal            6
++
+      getlocal2
+      getproperty         QName(PackageNamespace(""), "contextMenu")
+      getproperty         QName(PackageNamespace(""), "customItems")
+-     findpropstrict      QName(PackageNamespace("flash.ui"), "ContextMenuItem")
+-     getlocal3
+-     pushfalse
+-     pushfalse
+-     constructprop       QName(PackageNamespace("flash.ui"), "ContextMenuItem"), 3
++     ; findpropstrict      QName(PackageNamespace("flash.ui"), "ContextMenuItem")
++     ; getlocal3
++     ; pushfalse
++     ; pushfalse
++     ; constructprop       QName(PackageNamespace("flash.ui"), "ContextMenuItem"), 3
++     getlocal            6
+      callpropvoid        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "push"), 1
+ 
++     getlocal            6
++     getlex              QName(PackageNamespace("flash.events"), "ContextMenuEvent")
++     getproperty         QName(PackageNamespace(""), "MENU_ITEM_SELECT")
++     getlex              QName(PrivateNamespace(null, "cn.snowkit.uitls:VersionUtil"), "onVersionItemSelect")
++     callpropvoid        QName(PackageNamespace(""), "addEventListener"), 2
++
++     returnvoid
++    end ; code
++   end ; body
++  end ; method
++ end ; trait
++ trait method QName(PrivateNamespace(null, "cn.snowkit.uitls:VersionUtil"), "onVersionItemSelect")
++  method
++   refid "cn.snowkit.uitls:VersionUtil/onVersionItemSelect"
++   param QName(PackageNamespace("flash.events"), "ContextMenuEvent")
++   returns QName(PackageNamespace(""), "void")
++   body
++    maxstack 2
++    localcount 2
++    initscopedepth 4
++    maxscopedepth 5
++    code
++     getlocal0
++     pushscope
++     getlex              QName(PackageNamespace("com.youku.utils"), "OpenWindow")
++     getlex              QName(PackageNamespace("com.tudou.config"), "Config")
++     getproperty         QName(PackageNamespace(""), "HACK_LINK")
++     callpropvoid        QName(PackageNamespace(""), "openURL"), 1
+      returnvoid
+     end ; code
+    end ; body
+diff -u -r -N --exclude=.git ./com/tudou/ad/AdLoader.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/ad/AdLoader.class.asasm
+--- ./com/tudou/ad/AdLoader.class.asasm	2012-12-01 17:17:30.601060600 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/ad/AdLoader.class.asasm	2012-12-01 15:24:12.871558100 +0800
+@@ -647,6 +647,7 @@
+      initscopedepth 5
+      maxscopedepth 6
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude=.git ./com/tudou/ad/track/AdTracker.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/ad/track/AdTracker.class.asasm
+--- ./com/tudou/ad/track/AdTracker.class.asasm	2012-12-01 17:17:44.581470100 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/ad/track/AdTracker.class.asasm	2012-12-01 15:24:51.432689400 +0800
+@@ -686,6 +686,7 @@
+      initscopedepth 4
+      maxscopedepth 5
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude=.git ./com/tudou/config/Config.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/config/Config.class.asasm
+--- ./com/tudou/config/Config.class.asasm	2012-12-01 17:17:37.871272500 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/config/Config.class.asasm	2012-12-01 15:26:13.405096800 +0800
+@@ -191,6 +191,14 @@
+     pushstring          "http://click.stat.tudou.com/"
+     initproperty        QName(PackageNamespace(""), "UISKIN_URL")
+ 
++    findproperty        QName(PackageNamespace(""), "HACK_AUTHOR")
++    pushstring          "OpenGG"
++    initproperty        QName(PackageNamespace(""), "HACK_AUTHOR")
++
++    findproperty        QName(PackageNamespace(""), "HACK_LINK")
++    pushstring          "http://opengg.me/781/opengg-clean-player/"
++    initproperty        QName(PackageNamespace(""), "HACK_LINK")
++
+     returnvoid
+    end ; code
+   end ; body
+@@ -231,4 +239,6 @@
+  trait const QName(PackageNamespace(""), "ERROR_REPORT_URL") slotid 10 type QName(PackageNamespace(""), "String") value Utf8("http://erreport.tudou.com/errorlog/error.php") end
+  trait const QName(PackageNamespace(""), "TVP_REQUEST_URL_HTML") slotid 22 type QName(PackageNamespace(""), "String") value Utf8(" http://tvp.tudou.com/outplay/goto/getInnerItem.html") end
+  trait const QName(PackageNamespace(""), "ERROR_URL") slotid 11 type QName(PackageNamespace(""), "String") value Utf8("http://erreport.tudou.com/ce/err") end
++ trait const QName(PackageNamespace(""), "HACK_AUTHOR") slotid 37 type QName(PackageNamespace(""), "String") value Utf8("OpenGG") end
++ trait const QName(PackageNamespace(""), "HACK_LINK") slotid 38 type QName(PackageNamespace(""), "String") value Utf8("http://opengg.me/781/opengg-clean-player/") end
+ end ; class
+diff -u -r -N --exclude=.git ./com/tudou/home/consts/PlayerConsts.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/consts/PlayerConsts.class.asasm
+--- ./com/tudou/home/consts/PlayerConsts.class.asasm	2012-12-01 17:17:37.031247600 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/consts/PlayerConsts.class.asasm	2012-12-01 15:27:47.702863400 +0800
+@@ -138,7 +138,8 @@
+     initproperty        QName(PackageNamespace(""), "AD_PRECACHE_DELAY_TIME")
+ 
+     findproperty        QName(PackageNamespace(""), "AD_TIMEOUT_TIME")
+-    pushbyte            4
++    ; pushbyte            4
++    pushbyte            0
+     initproperty        QName(PackageNamespace(""), "AD_TIMEOUT_TIME")
+ 
+     findproperty        QName(PackageNamespace(""), "SAMPLE_USERS")
+@@ -471,7 +472,8 @@
+    end ; body
+   end ; method
+  end ; trait
+- trait const QName(PackageNamespace(""), "AD_TIMEOUT_TIME") slotid 25 type QName(PackageNamespace(""), "Number") value Integer(4) end
++ ; trait const QName(PackageNamespace(""), "AD_TIMEOUT_TIME") slotid 25 type QName(PackageNamespace(""), "Number") value Integer(4) end
++ trait const QName(PackageNamespace(""), "AD_TIMEOUT_TIME") slotid 25 type QName(PackageNamespace(""), "Number") value Integer(0) end
+  trait const QName(PackageNamespace(""), "CONTROL_DEFAULT_HEIGTH") slotid 11 type QName(PackageNamespace(""), "uint") value Integer(43) end
+  trait const QName(PackageNamespace(""), "SAMPLE_USERS") slotid 26 type QName(PackageNamespace(""), "Array") end
+  trait getter QName(PackageNamespace(""), "MAIN_WIDTH") flag FINAL dispid 10
+diff -u -r -N --exclude=.git ./com/tudou/home/model/PageInfo.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/model/PageInfo.class.asasm
+--- ./com/tudou/home/model/PageInfo.class.asasm	2012-12-01 17:17:34.301171100 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/model/PageInfo.class.asasm	2012-12-01 16:38:49.670215700 +0800
+@@ -570,11 +570,12 @@
+ 
+ L202:
+       findproperty        QName(PrivateNamespace(null, "com.tudou.home.model:PageInfo#0"), "_expandStage")
+-      getlex              QName(PrivateNamespace(null, "com.tudou.home.model:PageInfo#0"), "pageInfo")
+-      pushstring          "scale"
+-      getproperty         MultinameL([PrivateNamespace(null, "com.tudou.home.model:PageInfo#0"), PackageNamespace("com.tudou.home.model"), PackageNamespace(""), PrivateNamespace(null, "com.tudou.home.model:PageInfo#1"), PackageInternalNs("com.tudou.home.model"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.tudou.home.model:PageInfo"), StaticProtectedNs("com.tudou.home.model:PageInfo"), StaticProtectedNs("com.tudou.model:BaseInfo"), StaticProtectedNs("Object")])
+-      pushstring          "1"
+-      equals
++      ; getlex              QName(PrivateNamespace(null, "com.tudou.home.model:PageInfo#0"), "pageInfo")
++      ; pushstring          "scale"
++      ; getproperty         MultinameL([PrivateNamespace(null, "com.tudou.home.model:PageInfo#0"), PackageNamespace("com.tudou.home.model"), PackageNamespace(""), PrivateNamespace(null, "com.tudou.home.model:PageInfo#1"), PackageInternalNs("com.tudou.home.model"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("com.tudou.home.model:PageInfo"), StaticProtectedNs("com.tudou.home.model:PageInfo"), StaticProtectedNs("com.tudou.model:BaseInfo"), StaticProtectedNs("Object")])
++      ; pushstring          "1"
++      ; equals
++      pushtrue
+       initproperty        QName(PrivateNamespace(null, "com.tudou.home.model:PageInfo#0"), "_expandStage")
+ 
+       findproperty        QName(PrivateNamespace(null, "com.tudou.home.model:PageInfo#0"), "_frame1URL")
+diff -u -r -N --exclude=.git ./com/tudou/home/track/iResearch/FlashCookie.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/track/iResearch/FlashCookie.class.asasm
+--- ./com/tudou/home/track/iResearch/FlashCookie.class.asasm	2012-12-01 17:17:40.831361700 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/track/iResearch/FlashCookie.class.asasm	2012-12-01 15:30:49.218183000 +0800
+@@ -2729,6 +2729,7 @@
+      initscopedepth 10
+      maxscopedepth 11
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude=.git ./com/tudou/home/track/PinbackTracker.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/track/PinbackTracker.class.asasm
+--- ./com/tudou/home/track/PinbackTracker.class.asasm	2012-12-01 17:17:37.226253800 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/track/PinbackTracker.class.asasm	2012-12-01 15:28:52.849770700 +0800
+@@ -218,6 +218,7 @@
+      initscopedepth 4
+      maxscopedepth 5
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude=.git ./com/tudou/home/track/PlayerEventTracker.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/track/PlayerEventTracker.class.asasm
+--- ./com/tudou/home/track/PlayerEventTracker.class.asasm	2012-12-01 17:17:40.681355100 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/home/track/PlayerEventTracker.class.asasm	2012-12-01 15:30:07.046948100 +0800
+@@ -54,6 +54,7 @@
+      initscopedepth 4
+      maxscopedepth 5
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+@@ -370,6 +371,7 @@
+      initscopedepth 4
+      maxscopedepth 5
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude=.git ./com/tudou/track/GlobalTracker.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/track/GlobalTracker.class.asasm
+--- ./com/tudou/track/GlobalTracker.class.asasm	2012-12-01 17:17:41.561382700 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/track/GlobalTracker.class.asasm	2012-12-01 15:31:25.944261100 +0800
+@@ -73,6 +73,7 @@
+      initscopedepth 4
+      maxscopedepth 5
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude=.git ./com/tudou/track/NewBufferTracker.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/track/NewBufferTracker.class.asasm
+--- ./com/tudou/track/NewBufferTracker.class.asasm	2012-12-01 17:17:36.516234300 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/track/NewBufferTracker.class.asasm	2012-12-01 15:31:58.195207900 +0800
+@@ -44,6 +44,7 @@
+      initscopedepth 4
+      maxscopedepth 5
+      code
++      returnvoid
+       getlocal0
+       pushscope
+ 
+diff -u -r -N --exclude=.git ./com/tudou/track/thirdPart/TimeLogTracker.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/track/thirdPart/TimeLogTracker.class.asasm
+--- ./com/tudou/track/thirdPart/TimeLogTracker.class.asasm	2012-12-01 17:17:44.606471600 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/tudou/track/thirdPart/TimeLogTracker.class.asasm	2012-12-01 15:32:40.726457400 +0800
+@@ -51,6 +51,7 @@
+     initscopedepth 3
+     maxscopedepth 4
+     code
++     returnvoid
+      getlocal0
+      pushscope
+ 
+diff -u -r -N --exclude=.git ./com/youku/utils/OpenWindow.class.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/youku/utils/OpenWindow.class.asasm
+--- ./com/youku/utils/OpenWindow.class.asasm	1970-01-01 08:00:00.000000000 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/youku/utils/OpenWindow.class.asasm	2012-11-26 23:53:46.237986300 +0800
+@@ -0,0 +1,700 @@
++class
++ refid "com.youku.utils:OpenWindow"
++ instance QName(PackageNamespace("com.youku.utils"), "OpenWindow")
++  extends QName(PackageNamespace(""), "Object")
++  flag SEALED
++  flag PROTECTEDNS
++  protectedns ProtectedNamespace("com.youku.utils:OpenWindow")
++  iinit
++   refid "com.youku.utils:OpenWindow/iinit"
++   body
++    maxstack 1
++    localcount 1
++    initscopedepth 4
++    maxscopedepth 5
++    code
++     getlocal0
++     pushscope
++
++     getlocal0
++     constructsuper      0
++
++     returnvoid
++    end ; code
++   end ; body
++  end ; method
++ end ; instance
++ cinit
++  refid "com.youku.utils:OpenWindow/cinit"
++  body
++   maxstack 1
++   localcount 1
++   initscopedepth 3
++   maxscopedepth 4
++   code
++    getlocal0
++    pushscope
++
++    returnvoid
++   end ; code
++  end ; body
++ end ; method
++ trait method QName(PackageNamespace(""), "navigateOpenURL") flag FINAL dispid 3
++  method
++   refid "com.youku.utils:OpenWindow/navigateOpenURL"
++   param QName(PackageNamespace(""), "String")
++   param QName(PackageNamespace(""), "String")
++   param QName(PackageNamespace(""), "String")
++   returns QName(PackageNamespace(""), "void")
++   flag NEED_ACTIVATION
++   flag HAS_OPTIONAL
++   optional Utf8("_blank")
++   optional Utf8("")
++   body
++    maxstack 3
++    localcount 6
++    initscopedepth 4
++    maxscopedepth 9
++    code
++     getlocal0
++     pushscope
++
++     newactivation
++     dup
++     setlocal            4
++
++     pushscope
++
++     getscopeobject      1
++     getlocal1
++     setslot             1
++
++     getscopeobject      1
++     getlocal2
++     setslot             2
++
++     getscopeobject      1
++     getlocal3
++     setslot             3
++
++L15:
++     findpropstrict      QName(PackageNamespace("flash.net"), "navigateToURL")
++     findpropstrict      QName(PackageNamespace("flash.net"), "URLRequest")
++     getscopeobject      1
++     getslot             1
++     constructprop       QName(PackageNamespace("flash.net"), "URLRequest"), 1
++     getscopeobject      1
++     getslot             2
++     callpropvoid        QName(PackageNamespace("flash.net"), "navigateToURL"), 2
++
++L23:
++     jump                L37
++
++L24:
++     getlocal0
++     pushscope
++
++     getlocal            4
++     pushscope
++
++     newcatch            0
++     dup
++     setlocal            5
++
++     dup
++     pushscope
++
++     swap
++     setslot             1
++
++     popscope
++     kill                5
++L37:
++     returnvoid
++    end ; code
++    try from L15 to L23 target L24 type QName(PackageNamespace(""), "Error") name QName(PackageNamespace(""), "e") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "url") slotid 1 type QName(PackageNamespace(""), "String") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "window") slotid 2 type QName(PackageNamespace(""), "String") value Utf8("_blank") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "features") slotid 3 type QName(PackageNamespace(""), "String") value Utf8("") end
++   end ; body
++  end ; method
++ end ; trait
++ trait method QName(PackageNamespace(""), "navigateOpen") flag FINAL dispid 4
++  method
++   refid "com.youku.utils:OpenWindow/navigateOpen"
++   param QName(PackageNamespace("flash.net"), "URLRequest")
++   param QName(PackageNamespace(""), "String")
++   param QName(PackageNamespace(""), "String")
++   returns QName(PackageNamespace(""), "void")
++   flag NEED_ACTIVATION
++   flag HAS_OPTIONAL
++   optional Utf8("_blank")
++   optional Utf8("")
++   body
++    maxstack 3
++    localcount 6
++    initscopedepth 4
++    maxscopedepth 9
++    code
++     getlocal0
++     pushscope
++
++     newactivation
++     dup
++     setlocal            4
++
++     pushscope
++
++     getscopeobject      1
++     getlocal1
++     setslot             1
++
++     getscopeobject      1
++     getlocal2
++     setslot             2
++
++     getscopeobject      1
++     getlocal3
++     setslot             3
++
++L15:
++     findpropstrict      QName(PackageNamespace("flash.net"), "navigateToURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     callpropvoid        QName(PackageNamespace("flash.net"), "navigateToURL"), 2
++
++L21:
++     jump                L35
++
++L22:
++     getlocal0
++     pushscope
++
++     getlocal            4
++     pushscope
++
++     newcatch            0
++     dup
++     setlocal            5
++
++     dup
++     pushscope
++
++     swap
++     setslot             1
++
++     popscope
++     kill                5
++L35:
++     returnvoid
++    end ; code
++    try from L15 to L21 target L22 type QName(PackageNamespace(""), "Error") name QName(PackageNamespace(""), "e") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "urlrequest") slotid 1 type QName(PackageNamespace("flash.net"), "URLRequest") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "window") slotid 2 type QName(PackageNamespace(""), "String") value Utf8("_blank") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "features") slotid 3 type QName(PackageNamespace(""), "String") value Utf8("") end
++   end ; body
++  end ; method
++ end ; trait
++ trait method QName(PackageNamespace(""), "open") flag FINAL dispid 5
++  method
++   refid "com.youku.utils:OpenWindow/open"
++   param QName(PackageNamespace("flash.net"), "URLRequest")
++   param QName(PackageNamespace(""), "String")
++   param QName(PackageNamespace(""), "String")
++   returns QName(PackageNamespace(""), "void")
++   flag HAS_OPTIONAL
++   optional Utf8("_blank")
++   optional Utf8("")
++   body
++    maxstack 4
++    localcount 4
++    initscopedepth 3
++    maxscopedepth 4
++    code
++     getlocal0
++     pushscope
++
++     findpropstrict      QName(PackageNamespace(""), "openURL")
++     getlocal1
++     getproperty         QName(PackageNamespace(""), "url")
++     getlocal2
++     getlocal3
++     callpropvoid        QName(PackageNamespace(""), "openURL"), 3
++
++     returnvoid
++    end ; code
++   end ; body
++  end ; method
++ end ; trait
++ trait method QName(PackageNamespace(""), "openURL") flag FINAL dispid 6
++  method
++   refid "com.youku.utils:OpenWindow/openURL"
++   param QName(PackageNamespace(""), "String")
++   param QName(PackageNamespace(""), "String")
++   param QName(PackageNamespace(""), "String")
++   returns QName(PackageNamespace(""), "void")
++   flag NEED_ACTIVATION
++   flag HAS_OPTIONAL
++   optional Utf8("_blank")
++   optional Utf8("")
++   body
++    maxstack 5
++    localcount 6
++    initscopedepth 4
++    maxscopedepth 9
++    code
++     getlocal0
++     pushscope
++
++     newactivation
++     dup
++     setlocal            4
++
++     pushscope
++
++     getscopeobject      1
++     getlocal1
++     setslot             1
++
++     getscopeobject      1
++     getlocal2
++     setslot             2
++
++     getscopeobject      1
++     getlocal3
++     setslot             3
++
++     getscopeobject      1
++     pushstring          "window.open"
++     setslot             4
++
++     getscopeobject      1
++     findpropstrict      QName(PackageNamespace("flash.net"), "URLRequest")
++     getscopeobject      1
++     getslot             1
++     constructprop       QName(PackageNamespace("flash.net"), "URLRequest"), 1
++     coerce              QName(PackageNamespace("flash.net"), "URLRequest")
++     setslot             5
++
++     getscopeobject      1
++     findpropstrict      QName(PrivateNamespace(null, "com.youku.utils:OpenWindow"), "getBrowserName")
++     callproperty        QName(PrivateNamespace(null, "com.youku.utils:OpenWindow"), "getBrowserName"), 0
++     coerce_s
++     setslot             6
++
++     getscopeobject      1
++     getslot             6
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "toLowerCase"), 0
++     pushstring          "firefox"
++     ifne                L68
++
++L35:
++     getlex              QName(PackageNamespace("flash.external"), "ExternalInterface")
++     getscopeobject      1
++     getslot             4
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     getscopeobject      1
++     getslot             3
++     callpropvoid        QName(PackageNamespace(""), "call"), 4
++
++L45:
++     jump                L67
++
++L46:
++     getlocal0
++     pushscope
++
++     getlocal            4
++     pushscope
++
++     newcatch            0
++     dup
++     setlocal            5
++
++     dup
++     pushscope
++
++     swap
++     setslot             1
++
++     findpropstrict      QName(PackageNamespace(""), "navigateOpenURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     getscopeobject      1
++     getslot             3
++     callpropvoid        QName(PackageNamespace(""), "navigateOpenURL"), 3
++
++     popscope
++     kill                5
++L67:
++     jump                L157
++
++L68:
++     getscopeobject      1
++     getslot             6
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "toLowerCase"), 0
++     pushstring          "ie9"
++     ifne                L80
++
++     findpropstrict      QName(PackageNamespace(""), "navigateOpenURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     callpropvoid        QName(PackageNamespace(""), "navigateOpenURL"), 2
++
++     jump                L157
++
++L80:
++     getscopeobject      1
++     getslot             6
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "toLowerCase"), 0
++     pushstring          "ie"
++     ifne                L118
++
++L85:
++     getlex              QName(PackageNamespace("flash.external"), "ExternalInterface")
++     getscopeobject      1
++     getslot             4
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     getscopeobject      1
++     getslot             3
++     callpropvoid        QName(PackageNamespace(""), "call"), 4
++
++L95:
++     jump                L117
++
++L96:
++     getlocal0
++     pushscope
++
++     getlocal            4
++     pushscope
++
++     newcatch            1
++     dup
++     setlocal            5
++
++     dup
++     pushscope
++
++     swap
++     setslot             1
++
++     findpropstrict      QName(PackageNamespace(""), "navigateOpenURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     getscopeobject      1
++     getslot             3
++     callpropvoid        QName(PackageNamespace(""), "navigateOpenURL"), 3
++
++     popscope
++     kill                5
++L117:
++     jump                L157
++
++L118:
++     getscopeobject      1
++     getslot             6
++     pushstring          "Safari"
++     ifne                L129
++
++     findpropstrict      QName(PackageNamespace(""), "navigateOpenURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     callpropvoid        QName(PackageNamespace(""), "navigateOpenURL"), 2
++
++     jump                L157
++
++L129:
++     getscopeobject      1
++     getslot             6
++     pushstring          "Opera"
++     ifne                L140
++
++     findpropstrict      QName(PackageNamespace(""), "navigateOpenURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     callpropvoid        QName(PackageNamespace(""), "navigateOpenURL"), 2
++
++     jump                L157
++
++L140:
++     getscopeobject      1
++     getslot             6
++     pushstring          "360"
++     ifne                L151
++
++     findpropstrict      QName(PackageNamespace(""), "navigateOpenURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     callpropvoid        QName(PackageNamespace(""), "navigateOpenURL"), 2
++
++     jump                L157
++
++L151:
++     findpropstrict      QName(PackageNamespace(""), "navigateOpenURL")
++     getscopeobject      1
++     getslot             1
++     getscopeobject      1
++     getslot             2
++     callpropvoid        QName(PackageNamespace(""), "navigateOpenURL"), 2
++
++L157:
++     returnvoid
++    end ; code
++    try from L35 to L45 target L46 type QName(PackageNamespace(""), "Error") name QName(PackageNamespace(""), "e") end
++    try from L85 to L95 target L96 type QName(PackageNamespace(""), "Error") name QName(PackageNamespace(""), "e") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "url") slotid 1 type QName(PackageNamespace(""), "String") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "window") slotid 2 type QName(PackageNamespace(""), "String") value Utf8("_blank") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "features") slotid 3 type QName(PackageNamespace(""), "String") value Utf8("") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "WINDOW_OPEN_FUNCTION") slotid 4 type QName(PackageNamespace(""), "String") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "myURL") slotid 5 type QName(PackageNamespace("flash.net"), "URLRequest") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "browserName") slotid 6 type QName(PackageNamespace(""), "String") end
++   end ; body
++  end ; method
++ end ; trait
++ trait method QName(PrivateNamespace(null, "com.youku.utils:OpenWindow"), "getBrowserName") flag FINAL dispid 7
++  method
++   refid "com.youku.utils:OpenWindow/getBrowserName"
++   returns QName(PackageNamespace(""), "String")
++   flag NEED_ACTIVATION
++   body
++    maxstack 3
++    localcount 3
++    initscopedepth 4
++    maxscopedepth 9
++    code
++     getlocal0
++     pushscope
++
++     newactivation
++     dup
++     setlocal1
++
++     pushscope
++
++     getscopeobject      1
++     pushnull
++     coerce_s
++     setslot             1
++
++     getscopeobject      1
++     pushstring          ""
++     setslot             2
++
++L13:
++     getscopeobject      1
++     getlex              QName(PackageNamespace("flash.external"), "ExternalInterface")
++     pushstring          "function getBrowser(){return navigator.userAgent;}"
++     callproperty        QName(PackageNamespace(""), "call"), 1
++     coerce_s
++     setslot             2
++
++L19:
++     jump                L36
++
++L20:
++     getlocal0
++     pushscope
++
++     getlocal1
++     pushscope
++
++     newcatch            0
++     dup
++     setlocal2
++
++     dup
++     pushscope
++
++     swap
++     setslot             1
++
++     getscopeobject      1
++     pushstring          ""
++     setslot             2
++
++     popscope
++     kill                2
++L36:
++     getscopeobject      1
++     getslot             2
++     pushnull
++     equals
++     not
++     dup
++     iffalse             L50
++
++     pop
++     getscopeobject      1
++     getslot             2
++     pushstring          "Firefox"
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "indexOf"), 1
++     pushbyte            0
++     greaterequals
++L50:
++     iffalse             L55
++
++     getscopeobject      1
++     pushstring          "Firefox"
++     setslot             1
++
++     jump                L115
++
++L55:
++     getscopeobject      1
++     getslot             2
++     pushnull
++     equals
++     not
++     dup
++     iffalse             L69
++
++     pop
++     getscopeobject      1
++     getslot             2
++     pushstring          "Safari"
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "indexOf"), 1
++     pushbyte            0
++     greaterequals
++L69:
++     iffalse             L74
++
++     getscopeobject      1
++     pushstring          "Safari"
++     setslot             1
++
++     jump                L115
++
++L74:
++     getscopeobject      1
++     getslot             2
++     pushnull
++     equals
++     not
++     dup
++     iffalse             L88
++
++     pop
++     getscopeobject      1
++     getslot             2
++     pushstring          "MSIE"
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "indexOf"), 1
++     pushbyte            0
++     greaterequals
++L88:
++     iffalse             L93
++
++     getscopeobject      1
++     pushstring          "IE"
++     setslot             1
++
++     jump                L115
++
++L93:
++     getscopeobject      1
++     getslot             2
++     pushnull
++     equals
++     not
++     dup
++     iffalse             L107
++
++     pop
++     getscopeobject      1
++     getslot             2
++     pushstring          "Opera"
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "indexOf"), 1
++     pushbyte            0
++     greaterequals
++L107:
++     iffalse             L112
++
++     getscopeobject      1
++     pushstring          "Opera"
++     setslot             1
++
++     jump                L115
++
++L112:
++     getscopeobject      1
++     pushstring          "Undefined"
++     setslot             1
++
++L115:
++     getscopeobject      1
++     getslot             2
++     pushnull
++     equals
++     not
++     dup
++     iffalse             L129
++
++     pop
++     getscopeobject      1
++     getslot             2
++     pushstring          "MSIE 9"
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "indexOf"), 1
++     pushbyte            0
++     greaterequals
++L129:
++     iffalse             L133
++
++     getscopeobject      1
++     pushstring          "IE9"
++     setslot             1
++
++L133:
++     getscopeobject      1
++     getslot             2
++     pushnull
++     equals
++     not
++     dup
++     iffalse             L147
++
++     pop
++     getscopeobject      1
++     getslot             2
++     pushstring          "360SE"
++     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "indexOf"), 1
++     pushbyte            0
++     greaterequals
++L147:
++     iffalse             L151
++
++     getscopeobject      1
++     pushstring          "360"
++     setslot             1
++
++L151:
++     getscopeobject      1
++     getslot             1
++     returnvalue
++    end ; code
++    try from L13 to L19 target L20 type QName(PackageNamespace(""), "Error") name QName(PackageNamespace(""), "e") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "browser") slotid 1 type QName(PackageNamespace(""), "String") end
++    trait slot QName(PackageInternalNs("com.youku.utils"), "browserAgent") slotid 2 type QName(PackageNamespace(""), "String") end
++   end ; body
++  end ; method
++ end ; trait
++end ; class
+diff -u -r -N --exclude=.git ./com/youku/utils/OpenWindow.script.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/youku/utils/OpenWindow.script.asasm
+--- ./com/youku/utils/OpenWindow.script.asasm	1970-01-01 08:00:00.000000000 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/com/youku/utils/OpenWindow.script.asasm	2012-11-26 23:53:46.237986300 +0800
+@@ -0,0 +1,29 @@
++script ; 50
++ sinit
++  refid "com.youku.utils:OpenWindow.sinit"
++  body
++   maxstack 2
++   localcount 1
++   initscopedepth 1
++   maxscopedepth 3
++   code
++    getlocal0
++    pushscope
++
++    findpropstrict      Multiname("OpenWindow", [PackageNamespace("com.youku.utils")])
++    getlex              QName(PackageNamespace(""), "Object")
++    pushscope
++
++    getlex              QName(PackageNamespace(""), "Object")
++    newclass            "com.youku.utils:OpenWindow"
++    popscope
++    initproperty        QName(PackageNamespace("com.youku.utils"), "OpenWindow")
++
++    returnvoid
++   end ; code
++  end ; body
++ end ; method
++ trait class QName(PackageNamespace("com.youku.utils"), "OpenWindow")
++  #include "OpenWindow.class.asasm"
++ end ; trait
++end ; script
+diff -u -r -N --exclude=.git ./TudouVideoPlayer_Homer_NewSkin-0.main.asasm D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/TudouVideoPlayer_Homer_NewSkin-0.main.asasm
+--- ./TudouVideoPlayer_Homer_NewSkin-0.main.asasm	2012-12-01 17:17:53.976746100 +0800
++++ D:\wamp\www\TudouVideoPlayer_Homer_NewSkin-0/TudouVideoPlayer_Homer_NewSkin-0.main.asasm	2012-12-01 15:23:04.594011400 +0800
+@@ -4,6 +4,7 @@
+  majorversion 46
+ 
+  #include "TudouVideoPlayer_Homer.script.asasm"
++ #include "com/youku/utils/OpenWindow.script.asasm"
+  #include "com/tudou/home/commands/customerAOP/CustomerCommandAop.script.asasm"
+  #include "org/puremvc/as3/interfaces/IProxy.script.asasm"
+  #include "com/tudou/newPlayer/TudouPlayer.script.asasm"

@@ -1,0 +1,249 @@
+From 7d3d41137fe4ee40a8ef23b06504306fb59db5a6 Mon Sep 17 00:00:00 2001
+From: OpenGG
+Date: Tue, 12 Mar 2013 14:44:43 +0800
+Subject: [PATCH] final
+
+---
+ com/youku/core/view/CoreMediator.class.asasm       |   9 --
+ com/youku/data/PlayerConstant.class.asasm          |   4 +-
+ .../plugins/report/view/ReportMediator.class.asasm | 176 ---------------------
+ 3 files changed, 2 insertions(+), 187 deletions(-)
+
+diff --git a/com/youku/core/view/CoreMediator.class.asasm b/com/youku/core/view/CoreMediator.class.asasm
+index 3e4b780..c11dfde 100644
+--- a/com/youku/core/view/CoreMediator.class.asasm
++++ b/com/youku/core/view/CoreMediator.class.asasm
+@@ -1888,15 +1888,6 @@ L44:
+       convert_b
+       setlocal2
+ 
+-      getlocal2
+-      iffalse             L12
+-
+-      getlocal0
+-      callpropvoid        QName(PrivateNamespace(null, "com.youku.core.view:CoreMediator#0"), "loadP2PLib"), 0
+-
+-      jump                L28
+-
+-L12:
+       getlocal0
+       getproperty         QName(PrivateNamespace(null, "com.youku.core.view:CoreMediator#0"), "_playerProxy")
+       findpropstrict      QName(PackageNamespace("com.youku.events"), "ReportEvent")
+diff --git a/com/youku/data/PlayerConstant.class.asasm b/com/youku/data/PlayerConstant.class.asasm
+index 123843e..de8252b 100644
+--- a/com/youku/data/PlayerConstant.class.asasm
++++ b/com/youku/data/PlayerConstant.class.asasm
+@@ -96,7 +96,7 @@ class
+     initproperty        QName(PackageNamespace(""), "SPECIAL_TYPE_SHENHE")
+ 
+     findproperty        QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE")
+-    pushstring          "v.youku.com"
++    pushstring          "v.opengg.me"
+     initproperty        QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE")
+ 
+     findproperty        QName(PackageNamespace(""), "MANAGE_SITE")
+@@ -138,7 +138,7 @@ class
+  trait const QName(PackageNamespace(""), "PANEL_CAPTION") slotid 13 type QName(PackageNamespace(""), "String") value Utf8("caption") end
+  trait const QName(PackageNamespace(""), "SPECIAL_TYPE_JIETU") slotid 14 type QName(PackageNamespace(""), "String") value Utf8("jietu") end
+  trait const QName(PackageNamespace(""), "SPECIAL_TYPE_SHENHE") slotid 15 type QName(PackageNamespace(""), "String") value Utf8("shenhe") end
+- trait const QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE") slotid 16 type QName(PackageNamespace(""), "String") value Utf8("v.youku.com") end
++ trait const QName(PackageNamespace(""), "PLAYLIST_NORMAL_SITE") slotid 16 type QName(PackageNamespace(""), "String") value Utf8("v.opengg.me") end
+  trait const QName(PackageNamespace(""), "MANAGE_SITE") slotid 17 type QName(PackageNamespace(""), "String") value Utf8("manage.youku.com") end
+  trait const QName(PackageNamespace(""), "FEEMANAGE_SITE") slotid 18 type QName(PackageNamespace(""), "String") value Utf8("feemanage.youku.com") end
+  trait const QName(PackageNamespace(""), "TAOBAO_SITE") slotid 19 type QName(PackageNamespace(""), "String") value Utf8("taobao.com") end
+diff --git a/com/youku/plugins/report/view/ReportMediator.class.asasm b/com/youku/plugins/report/view/ReportMediator.class.asasm
+index 91894e3..407950d 100644
+--- a/com/youku/plugins/report/view/ReportMediator.class.asasm
++++ b/com/youku/plugins/report/view/ReportMediator.class.asasm
+@@ -521,188 +521,12 @@ L16:
+ 
+       getlocal0
+       getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ConductorEvent")
+-      getproperty         QName(PackageNamespace(""), "METADATA_UPDATED")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onMetadataUpdated")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "USERACTION_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onUserActionEvent")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "STATIC_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onStaticReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+       getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+       getproperty         QName(PackageNamespace(""), "DYNAMIC_REPORT")
+       getlocal0
+       getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onDynamicReport")
+       callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+ 
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "WASTE_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onWasteReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "VIDEO_TIME_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onVideoTimeReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "WPLAY_LOG_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onWplayLogReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "FULLSCREEN_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onFullScreenReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "REPLAY_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onReplayReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "EXTERIOR_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onExteriorReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "AD_BLOCK_NOTICE_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onADBlockNotice")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "ENDCARD_RELATED_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onEndcardReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "DELAY_TIME_REPORT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onDelayTimeReport")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "INVALID_PLAY_EVENT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onInvalidPlayEvent")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "PLAY_POLICY_ALLOW")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayVV")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "PLAYVV_IKU")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayVV")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "LOAD_P2P_SWC")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayVV")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "CORE_INIT_EVENT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayVV")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "NOT_REAL_USE_P2P")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayVV")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "REAL_USE_P2P")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayVV")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "P2P_SOCKET_FAIL")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayVV")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "PLAY_ERROR")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayError")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "_playerProxy")
+-      getlex              QName(PackageNamespace("com.youku.events"), "ReportEvent")
+-      getproperty         QName(PackageNamespace(""), "PLAYER_LOAD_TIME_EVENT")
+-      getlocal0
+-      getproperty         QName(PrivateNamespace(null, "com.youku.plugins.report.view:ReportMediator#0"), "onPlayerLoadTimeEvent")
+-      callpropvoid        QName(Namespace("flash.events:IEventDispatcher"), "addEventListener"), 2
+-
+       returnvoid
+      end ; code
+     end ; body
+-- 
+1.8.1.msysgit.1
+
